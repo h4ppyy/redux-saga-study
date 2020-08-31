@@ -1,26 +1,47 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { increment, decrement, incrementSaga, decrementSaga } from './actions'
 
-function App() {
+
+const App = () => {
+
+  const dispatch = useDispatch()
+
+  const counter = useSelector(state => state.counter)
+
+  const onIncrement = () => {
+    dispatch(increment())
+  }
+
+  const onDecrement = () => {
+    dispatch(decrement())
+  }
+
+  const onIncrementSaga = () => {
+    dispatch(incrementSaga())
+  }
+
+  const onDecrementSaga = () => {
+    dispatch(decrementSaga())
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <h1>{counter}</h1>
+      <button onClick={onIncrement}>
+        Inc
+      </button>
+      <button onClick={onDecrement}>
+        Dec
+      </button>
+      <button onClick={onIncrementSaga}>
+        Saga Inc
+      </button>
+      <button onClick={onDecrementSaga}>
+        Saga Dec
+      </button>
+    </>
   );
 }
 
-export default App;
+export default App
